@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
 from pathlib import Path
 import environ
+
 
 env = environ.Env()
 
@@ -40,10 +40,10 @@ THIRD_PARTY_APPS = [
     "django_countries",
     "phonenumber_field",
     "drf_yasg",
-    "corshead",
+    "corsheaders",
 ]
 
-LOCAL_APPS = ["core_apps.profiles", "core_apps.common", "core_apps.users"]
+LOCAL_APPS = ["core.profiles", "core.common", "core.users"]
 
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

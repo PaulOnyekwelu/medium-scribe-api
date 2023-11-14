@@ -16,7 +16,7 @@ show-logs:
 show-logs-api:
 	docker compose -f local.yml logs api
 
-make-migrations:
+migrations:
 	docker compose -f local.yml run --rm api python manage.py makemigrations
 
 migrate:

@@ -12,3 +12,7 @@ Pillow==10.1.0
 argon2-cffi==23.1.0
 pytz==2023.3.post1
 django-taggit==5.0.1
+redis==5.0.1
+celery==5.3.5
+flower==2.0.1
+django-celery-email==3.0.0

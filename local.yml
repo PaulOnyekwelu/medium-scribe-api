@@ -17,6 +17,7 @@ services:
     depends_on:
       - postgres
       - mailhog
+      - redis
     command: /start
     networks:
       - medium-scribe-api
@@ -41,10 +42,50 @@ services:
     networks:
       - medium-scribe-api
 
+  redis:
+    image: redis:7-alpine
+    networks:
+      - medium-scribe-api
+  
+  celery-worker:
+    build:
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+    command: /start-celeryworker
+    volumes:
+      - .:/app
+    env_file:
+      - ./.envs/.local/.docker
+      - ./.envs/.local/.postgres
+    depends_on:
+      - redis
+      - postgres
+      - mailhog
+    networks:
+      - medium-scribe-api
+
+  flower:
+    build:
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+    command: /start-flower
+    volumes:
+      - flower_data:/data
+    env_file:
+      - ./.envs/.local/.docker
+      - ./.envs/.local/.postgres
+    ports:
+      - "5555:5555"
+    depends_on:
+      - "redis"
+      - "postgres"
+    networks:
+      - medium-scribe-api
+
   nginx:
     build:
-      context: ./docker/local/nginx # defines the root for the build
-      dockerfile: Dockerfile
+      context: . # define the root for the build
+      dockerfile: ./docker/local/nginx/Dockerfile
     restart: always
     depends_on:
       - api
@@ -65,5 +106,6 @@ volumes:
   media_volume:
   local_postgres_data: {}
   local_postgres_data_backups: {}
+  flower_data: {}
 
 

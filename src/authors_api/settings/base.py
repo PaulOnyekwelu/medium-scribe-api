@@ -19,7 +19,7 @@ env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 
-APP_DIR = ROOT_DIR / "core_apps"
+APP_DIR = ROOT_DIR / "core"
 
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
@@ -50,7 +50,7 @@ THIRD_PARTY_APPS = [
     "djcelery_email",
 ]
 
-LOCAL_APPS = ["core_apps.profiles", "core_apps.common", "core_apps.users"]
+LOCAL_APPS = ["core.profiles", "core.common", "core.users"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -100,7 +100,6 @@ DATABASES = {
 # DATABASES = {"default": env.db("DATABASE_URL")}
 
 
-
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -108,7 +107,6 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
     "django.contrib.auth.hashers.ScryptPasswordHasher",
 ]
-
 
 
 # Password validation
@@ -152,7 +150,7 @@ ADMIN_URL = "admin/"
 STATIC_URL = "staticfiles/"
 STATIC_ROOT = str(ROOT_DIR / "staticfiles")
 
-MEDIA_URL = "mediafiles"
+MEDIA_URL = "mediafiles/"
 MEDIA_ROOT = str(ROOT_DIR / "mediafiles")
 
 # Default primary key field type
@@ -163,3 +161,24 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_URLS_REGEX = r"^api/.*$"
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(name)-12s %(asctime)s %(module)s "
+            "%(process)d %(thread)d %(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose"
+        }
+    },
+    "root": {
+        "level": "INFO",
+        "handlers": ["console"]
+    }
+}

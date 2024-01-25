@@ -1,3 +1,13 @@
+# added by me
+.vscode
+.idea
+.coverage*
+.DS_Store
+staticfiles
+.envs/*
+!.envs/.local/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

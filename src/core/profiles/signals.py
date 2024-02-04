@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 User = get_user_model()
 
 
-@receiver(post_save, User)
+@receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)

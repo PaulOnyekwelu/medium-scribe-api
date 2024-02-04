@@ -23,7 +23,7 @@ class Profile(TimeStampedModel):
             _("Other"),
         )
 
-    user_id = models.OneToOneField(
+    user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="profile"
     )
     phone_number = PhoneNumberField(

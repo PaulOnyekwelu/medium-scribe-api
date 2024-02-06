@@ -71,6 +71,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "sql-inspect.middleware.SQLInspectMiddleware",
 ]
 
 ROOT_URLCONF = "authors_api.urls"
@@ -209,7 +210,7 @@ REST_AUTH = {
     "USE_JWT": True,
     "JWT_AUTH_COOKIE": "ms-access-token",
     "JWT_AUTH_REFRESH_COOKIE": "ms-refresh-token",
-    "REGISTER_SERIALIZER": "core.users.serializers.CustomRegisterSerializer"
+    "REGISTER_SERIALIZER": "core.users.serializers.CustomRegisterSerializer",
 }
 
 AUTHENTICATION_BACKENDS = [

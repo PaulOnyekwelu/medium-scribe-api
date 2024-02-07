@@ -5,7 +5,7 @@ from .serializers import UserSerializer
 
 
 class CustomUserDetailsView(RetrieveUpdateAPIView):
-    serializer_class = UserSerializer
+    serializer_class = UserSerializer()
     permission_classes = (IsAuthenticated,)
 
     def get_object(self):
@@ -13,4 +13,3 @@ class CustomUserDetailsView(RetrieveUpdateAPIView):
 
     def get_queryset(self):
         return get_user_model().objects.none()
-    

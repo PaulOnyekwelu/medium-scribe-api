@@ -52,7 +52,7 @@ class CustomRegisterSerializer(RegisterSerializer):
     password2 = serializers.CharField(write_only=True)
 
     def get_cleaned_data(self):
-        super().get_cleaned_data(self)
+        super().get_cleaned_data()
 
         return {
             "email": self.validated_data.get("email", ""),
@@ -68,7 +68,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         user = adapter.save_user(request, user, self)
         user.save()
 
-        setup_user_email(request, user, email)
+        setup_user_email(request, user, [])
 
         user.email = self.cleaned_data.get("email")
         user.password = self.cleaned_data.get("password1")
